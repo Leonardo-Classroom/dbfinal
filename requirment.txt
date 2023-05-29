@@ -1,0 +1,72 @@
+我是老闆，你是工程師，你要無條件聽從指令，撰寫完整程式碼，無須擔心token長度。
+
+寫C++
+以附件檔案中的選課資料為基礎，實作 indexing 機制進行選課查詢，加入繁體中文註解
+
+附件檔案說明
+DB_students.csv的欄位有student_id,course_id,course_name，資料筆數有超過40萬筆，可能有course_id不同但course_name相同的資料。如以下格式：
+student_id,course_id,course_name
+D0877706,2142,會計學(二)
+D0759313,1297,程式設計(IV)
+D072151686,1320,機率論
+D016636552,2175,管理資訊系統
+...
+
+程式執行時，
+實作資料 repository: 將原始資料檔案以 block 為單位切割，分別儲存成不同檔案，檔名格式為block1.csv、block2.csv、block3.csv等等，並存放至名為blocks的資料夾，單一 block 最多只能存放一百筆選課資料，
+在切割的過程中，製作balancedTreeIndex_student_id.csv以B+ tree的方式來記錄每個學號的的資料存在哪些block檔案中。
+
+並以上述 repository 為基礎，撰寫以下的balancedTreeIndex用來以B+ tree的方式尋找目標資料在哪些block的檔案中。
+製作 balancedTreeIndex_student_id.csv 用來以學號查詢該學號所選的所有課程之課號及課名。
+製作 balancedTreeIndex_course_id.csv 用來以課號查詢該課號選課的所有學生之學號。
+製作 balancedTreeIndex_course_name.csv 用來以課名查詢該課號選課的所有學生之學號。
+
+且以B+ tree的方式
+
+介面：
+
++-------------------+
+ 1. 製作block           
+ 2. 查詢student_id      
+ 3. 查詢course_id       
+ 4. 查詢course_name     
+ 5. exit                
++-------------------+
+
+
+輸入選項1時，
+實作資料 repository: 將原始資料檔案以 block 為單位且以B+ tree的方式切割，分別儲存成不同檔案，檔名格式為block1.csv、block2.csv、block3.csv等等，並存放至名為blocks的資料夾，單一 block 最多只能存放一百筆選課資料
+並以上述 repository 為基礎，撰寫以下的balancedTreeIndex用來尋找目標資料在哪些block的檔案中。
+製作 balancedTreeIndex_student_id.csv 用來以學號查詢該學號所選的所有課程之課號及課名。
+製作 balancedTreeIndex_course_id.csv 用來以課號查詢該課號選課的所有學生之學號。
+製作 balancedTreeIndex_course_name.csv 用來以課名查詢該課號選課的所有學生之學號。
+
+
+
+寫C++，撰寫完整程式碼，加入繁體中文註解
+
+有一個檔案balancedTreeIndex_student_id.csv，內容如下：
+student_id,block_numbers
+D000003506,277,469,517,3553
+D000005500,235,872,896,2125,3254,4360,4365,4586
+D000006323,1110,1706,1893
+...
+
+每筆資料的第一個為學號，之後的數字為block的編號，表示該學號的資料存在哪些block檔案中，
+block檔案的檔名為block1.csv、block2.csv、block3.csv等等，並存放至名為blocks的資料夾。
+寫一個程式，讓使用者輸入學號，讀取balancedTreeIndex_student_id.csv，從中找到該學號出現在哪些block的檔案中，
+並依序讀取blocks資料夾中的block檔案，並將該學號的資料印出來，如下：
+
+輸入:
+D000003506
+
+輸出:
+student_id,course_id,course_name
+block1.csv:
+D000003506,2142,會計學(二)
+D000003506,2143,會計學(三)
+block3.csv:
+D000003506,2144,會計學(四)
+D000003506,2145,會計學(五)
+block100.csv:
+D000003506,2146,會計學(六)

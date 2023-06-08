@@ -6,6 +6,7 @@
 using namespace std;
 
 class RedBlackTree {
+
     private:
 
         struct Node {
@@ -40,18 +41,18 @@ class RedBlackTree {
             }
         };
 
-        void rotate_right(Node *p);
-        void rotate_left(Node *p);
+        void rotateRight(Node *p);
+        void rotateLeft(Node *p);
         void inorder(Node *p);
 
         string outputColor (bool color);
         Node* getSmallestChild(Node *p);
 
-        bool delete_child(Node *p, int data);
-        void delete_one_child(Node *p);
-        void delete_case(Node *p);
+        bool deleteChild(Node *p, int data);
+        void deleteOneChild(Node *p);
+        void deleteCase(Node *p);
         void insert(Node *p, int data);
-        void insert_case(Node *p);
+        void insertCase(Node *p);
         void DeleteTree(Node *p);
 
         Node *root, *NIL;
@@ -61,8 +62,8 @@ class RedBlackTree {
         RedBlackTree();
         ~RedBlackTree();
         void inorder();
-        void insert (int x);
-        bool delete_value (int data);
+        void insert(int x);
+        bool deleteValue(int data);
 
     
 };

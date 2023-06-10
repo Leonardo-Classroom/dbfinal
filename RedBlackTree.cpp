@@ -93,137 +93,7 @@ RedBlackTree::Node* RedBlackTree::getSmallestChild(RedBlackTree::Node *p){
     return getSmallestChild(p->leftTree);
 }
 
-bool RedBlackTree::deleteChild(Node *p, int data){
 
-    if(p->value>data){
-        if(p->leftTree==NIL){
-            return false;
-        }
-        return deleteChild(p->leftTree, data);
-    }else if(p->value<data){
-        if(p->rightTree==NIL){
-            return false;
-        }
-        return deleteChild(p->rightTree, data);
-    }else if(p->value==data){
-        if(p->rightTree==NIL){
-            deleteOneChild(p);
-            return true;
-        }
-        Node *smallest=getSmallestChild(p->rightTree);
-        swap(p->value, smallest->value);
-        deleteOneChild(smallest);
-
-        return true;
-    }else{
-        return false;
-    }
-}
-
-void RedBlackTree::deleteOneChild(Node *p){
-
-    Node *child=p->leftTree==NIL?p->rightTree:p->leftTree;
-    if(p->parent==NULL&&p->leftTree==NIL&&p->rightTree==NIL){
-        p=NULL;
-        root=p;
-
-        return;
-    }
-    
-    if(p->parent==NULL){
-
-        delete p;
-        child->parent=NULL;
-        root=child;
-        root->color=BLACK;
-
-        return;
-    }
-    
-    if(p->parent->leftTree==p){
-        p->parent->leftTree=child;
-    }else{
-        p->parent->rightTree = child;
-    }
-    child->parent = p->parent;
-
-    if(p->color == BLACK){
-        if(child->color == RED){
-            child->color = BLACK;
-        }else{
-            deleteCase(child);
-        }
-    }
-
-    delete p;
-}
-
-void RedBlackTree::deleteCase(Node *p){
-
-    if(p->parent==NULL){
-        p->color=BLACK;
-        return;
-    }
-
-    if(p->sibling()->color==RED){
-        p->parent->color=RED;
-        p->sibling()->color=BLACK;
-        if(p == p->parent->leftTree){
-            //rotateLeft(p->sibling());
-            rotateLeft(p->parent);
-        }else{
-            //rotateRight(p->sibling());
-            rotateRight(p->parent);
-        }
-    }
-
-    if( 
-        p->parent->color==BLACK && 
-        p->sibling()->color==BLACK && 
-        p->sibling()->leftTree->color==BLACK && 
-        p->sibling()->rightTree->color == BLACK
-    ){
-        p->sibling()->color=RED;
-        deleteCase(p->parent);
-    }else if(   
-        p->parent->color==RED &&
-        p->sibling()->color==BLACK &&
-        p->sibling()->leftTree->color == BLACK && 
-        p->sibling()->rightTree->color == BLACK
-    ){
-        p->sibling()->color = RED;
-        p->parent->color = BLACK;
-    }else{
-        if(p->sibling()->color == BLACK){
-            if(
-                p==p->parent->leftTree && 
-                p->sibling()->leftTree->color==RED && 
-                p->sibling()->rightTree->color == BLACK
-            ){
-                p->sibling()->color=RED;
-                p->sibling()->leftTree->color=BLACK;
-                rotateRight(p->sibling()->leftTree);
-            }else if(
-                p==p->parent->rightTree &&
-                p->sibling()->leftTree->color==BLACK &&
-                p->sibling()->rightTree->color==RED
-            ){
-                p->sibling()->color=RED;
-                p->sibling()->rightTree->color=BLACK;
-                rotateLeft(p->sibling()->rightTree);
-            }
-        }
-        p->sibling()->color=p->parent->color;
-        p->parent->color=BLACK;
-        if(p==p->parent->leftTree){
-            p->sibling()->rightTree->color=BLACK;
-            rotateLeft(p->sibling());
-        }else{
-            p->sibling()->leftTree->color=BLACK;
-            rotateRight(p->sibling());
-        }
-    }
-}
 
 void RedBlackTree::insert(Node *p, int data){
 
@@ -299,14 +169,7 @@ void RedBlackTree::insertCase(Node *p){
     }
 }
 
-void RedBlackTree::DeleteTree(Node *p){
-    if(!p || p == NIL){
-        return;
-    }
-    DeleteTree(p->leftTree);
-    DeleteTree(p->rightTree);
-    delete p;
-}
+
 
 RedBlackTree::RedBlackTree(){
     NIL=new Node();
@@ -314,12 +177,6 @@ RedBlackTree::RedBlackTree(){
     root=NULL;
 }
 
-RedBlackTree::~RedBlackTree(){
-    if(root){
-        DeleteTree(root);
-    }
-    delete NIL;
-}
 
 void RedBlackTree::inorder() {
     if(root==NULL){
@@ -340,6 +197,3 @@ void RedBlackTree::insert(int x){
     }
 }
 
-bool RedBlackTree::deleteValue(int data){
-    return deleteChild(root, data);
-}

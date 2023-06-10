@@ -48,22 +48,19 @@ class RedBlackTree {
         string outputColor (bool color);
         Node* getSmallestChild(Node *p);
 
-        bool deleteChild(Node *p, int data);
-        void deleteOneChild(Node *p);
-        void deleteCase(Node *p);
+
         void insert(Node *p, int data);
         void insertCase(Node *p);
-        void DeleteTree(Node *p);
+
 
         Node *root, *NIL;
 
     public:
 
         RedBlackTree();
-        ~RedBlackTree();
         void inorder();
         void insert(int x);
-        bool deleteValue(int data);
+
 
     
 };

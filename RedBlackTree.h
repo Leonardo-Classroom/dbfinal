@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 #define BLACK 1
 #define RED 0
@@ -10,11 +12,11 @@ class RedBlackTree {
     private:
 
         struct Node {
-            int value;
+            vector<string> value;
             bool color;
             Node *leftTree, *rightTree, *parent;
 
-            Node() : value(0), color(RED), leftTree(NULL), rightTree(NULL), parent(NULL) { }        
+            Node() : color(RED), leftTree(NULL), rightTree(NULL), parent(NULL) { }        
 
             Node* grandparent() {
                 if(parent == NULL){
@@ -49,7 +51,7 @@ class RedBlackTree {
         Node* getSmallestChild(Node *p);
 
 
-        void insert(Node *p, int data);
+        void insert(Node *p, vector<string> data);
         void insertCase(Node *p);
 
 
@@ -59,7 +61,8 @@ class RedBlackTree {
 
         RedBlackTree();
         void inorder();
-        void insert(int x);
+        void insert(vector<string> x);
+        vector<string> find(string x);
 
 
     

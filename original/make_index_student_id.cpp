@@ -79,29 +79,7 @@ void create_balanced_tree_index(const vector<Student>& students, const string& i
     }  
 }  
 
-void create_bplus_tree_index(const vector<Student>& students, const string& index_file_path, int block_size){
-    
-}
 
- 
-  
-// void create_balanced_tree_index(const std::vector<Student>& students, const std::string& index_file_path, int block_size) {  
-//     btree_map<std::string, std::vector<int>> index_map;  // Create a btree_map to store the relationship between student IDs and block numbers.  
-//     for (size_t i = 0; i < students.size(); ++i) {  // Iterate through all students.  
-//         int block_number = i / block_size + 1;  // Calculate the block number the student is in.  
-//         index_map[students[i].student_id].push_back(block_number);  // Add the student's ID and block number to the btree_map.  
-//     }  
-  
-//     std::ofstream index_file(index_file_path);  // Create a file stream to write the index file.  
-//     index_file << "student_id,block_numbers\n";  
-//     for (const auto& [student_id, block_numbers] : index_map) {  // Iterate through all key-value pairs in the btree_map.  
-//         index_file << student_id;  
-//         for (int block_number : block_numbers) {  // Iterate through all block numbers the student is in.  
-//             index_file << "," << block_number;  // Write the block number to the file, separated by commas.  
-//         }  
-//         index_file << "\n";  
-//     }  
-// }  
 
   
 int main() {  

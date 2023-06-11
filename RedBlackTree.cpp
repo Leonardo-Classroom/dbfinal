@@ -1,6 +1,7 @@
 #pragma once
 #include "RedBlackTree.h"
 
+
 void RedBlackTree::rotateRight(Node *p){
 
     Node *gp=p->grandparent();
@@ -73,8 +74,11 @@ void RedBlackTree::inorder(Node *p){
         inorder(p->leftTree);
     }
 
-    cout<<p->value<<" ";
-            
+    for(int i=0;i<p->value.size();i++){
+        cout<<p->value[i]<<" ";
+    }
+    cout<<endl;
+    
     if(p->rightTree){
         inorder(p->rightTree);
     }       
@@ -95,9 +99,16 @@ RedBlackTree::Node* RedBlackTree::getSmallestChild(RedBlackTree::Node *p){
 
 
 
-void RedBlackTree::insert(Node *p, int data){
+void RedBlackTree::insert(Node *p, vector<string> data){
 
-    if(p->value>=data){
+    if(p->value[0]==data[0]){
+
+        if(data[1]!=p->value[p->value.size()-1]){
+            p->value.push_back(data[1]);
+        }
+
+        return;
+    }else if(p->value[0]>=data[0]){
         if(p->leftTree!=NIL){
             insert(p->leftTree, data);
         }else{
@@ -186,7 +197,7 @@ void RedBlackTree::inorder() {
     cout<<endl;
 }
 
-void RedBlackTree::insert(int x){
+void RedBlackTree::insert(vector<string> x){
     if(root==NULL){
         root=new Node();
         root->color=BLACK;
@@ -195,5 +206,29 @@ void RedBlackTree::insert(int x){
     }else{
         insert(root, x);
     }
+}
+
+vector<string> RedBlackTree::find(string x){
+
+    vector<string> none;
+
+    Node *p=root;
+    while(p!=NIL){
+        if(p->value[0]==x){
+            cout<<"Found: "<<p->value[0]<<endl;
+            // for(int i=0;i<p->value.size();i++){
+            //     cout<<p->value[i]<<" ";
+            // }
+            // cout<<endl;
+            
+            return p->value;
+        }else if(p->value[0]>x){
+            p=p->leftTree;
+        }else{
+            p=p->rightTree;
+        }
+    }
+    cout<<"Not Found"<<endl;
+    return none;
 }
 

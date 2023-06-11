@@ -9,13 +9,18 @@ using namespace std;
 
 void mode1(vector<string> result){
 
-    cout<<"mode 1:"<<endl;
+    cout<<"mode 1"<<endl;
 
     if(result.size()){
         cout<<"result:"<<endl;
-        cout<<result[0]<<"> ";
+        cout<<result[0]<<"-->";
         for(int i=1;i<result.size();i++){
-            cout<<result[i]<<" ";
+            if(i==1)
+            	cout<<"\n";
+            cout<<i<<". ";
+			if(i<10)
+            	cout<<" ";
+			cout<<result[i]<<" \n";
         }
         cout<<endl;
         cout<<"==============="<<endl;

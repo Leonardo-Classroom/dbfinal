@@ -9,13 +9,13 @@ using namespace std;
 
 void mode1(vector<string> result){
 
-    cout<<"mode 1: "<<endl;
+    cout<<"mode 1: "<<endl; 
 
-    if(result.size()){
+    if(result.size()){ 
         cout<<"result:"<<endl;
-        cout<<result[0]<<"> ";
+        cout<<result[0]<<"> "; //print the input of studentId
         for(int i=1;i<result.size();i++){
-			cout<<result[i]<<" ";
+			cout<<result[i]<<" "; //print all of information (class id) which have been found
         }
         cout<<endl;
         cout<<"==============="<<endl;

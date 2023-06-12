@@ -70,6 +70,7 @@ void RedBlackTree::inorder(Node *p){
         return;
     }
         
+    //LVR
     if(p->leftTree){
         inorder(p->leftTree);
     }
@@ -114,7 +115,7 @@ void RedBlackTree::insert(Node *p, vector<string> data){
         }else{
             Node *tmp=new Node();
             tmp->value=data;
-            tmp->leftTree=tmp->rightTree = NIL;
+            tmp->leftTree=tmp->rightTree=NIL;
             tmp->parent=p;
             p->leftTree=tmp;
             insertCase(tmp);
@@ -140,31 +141,31 @@ void RedBlackTree::insertCase(Node *p){
         return;
     }
     if(p->parent->color==RED){
-        if(p->uncle()->color==RED){
+        if(p->uncle()->color==RED){ //B
             p->parent->color=p->uncle()->color=BLACK;
             p->grandparent()->color=RED;
             insertCase(p->grandparent());
-        }else{
-            if(
-                p->parent->rightTree==p && 
-                p->grandparent()->leftTree==p->parent
-            ){
+        }else{  //父紅叔黑
+            if( //A2
+                p->parent->rightTree==p &&  //子右
+                p->grandparent()->leftTree==p->parent   //父左叔右
+            ){  //先左旋再右旋
                 rotateLeft(p);
                 p->color=BLACK;
                 p->parent->color=RED;
                 rotateRight(p);
-            }else if(
+            }else if(   
                 p->parent->leftTree==p && 
-                p->grandparent()->rightTree==p->parent
+                p->grandparent()->rightTree==p->parent  
             ){
                 rotateRight(p);
                 p->color = BLACK;
                 p->parent->color=RED;
                 rotateLeft(p);
-            }else if(
-                p->parent->leftTree==p && 
-                p->grandparent()->leftTree==p->parent
-            ){
+            }else if(   //A1
+                p->parent->leftTree==p &&   //子左
+                p->grandparent()->leftTree==p->parent   //父左叔右
+            ){  //右旋
                 p->parent->color=BLACK;
                 p->grandparent()->color=RED;
                 rotateRight(p->parent);

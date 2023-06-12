@@ -69,9 +69,9 @@ void write_students_to_blocks(vector<Student> &students, string &folderPath, int
   
 int main() {  
 
-    string input_file_path="DB_students_tc_utf8.csv";  
+    string input_file_path="DB_students_tc_ansi.csv";  
     string blocks_folderPath="blocks";  
-    string index_file_path="balancedTreeIndex_student_id.csv";  
+ 
     int blockSize=100;  
   
     auto students=read_students_from_csv(input_file_path);  

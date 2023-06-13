@@ -34,17 +34,7 @@ void mode3(vector<string> result){
         //去這些block中找資料，把該課名的課號跟學生都印出來，
         //注意，不同課號可能有相同課名，要分開印出
 
-        //關鍵字搜尋
-        //加pause
-        //第幾位學生，有幾位學生
         vector<vector<string>> couid_std;
-        // cout<<couid_std.size()<<endl;
-        // couid_std[i][0]=="";
-        // couid_std[i].push
-
-        // if (str.find(str2) != string::npos) {
-        //         //.. found.
-        // } 
         for(int i=1;i<result.size();i++)
         {
             // cout<<"check block["<<i<<"]"<<endl;
@@ -55,22 +45,12 @@ void mode3(vector<string> result){
             while(getline (file,line))
             {
                 vector<string> tokens=split3(line, ',');
-                // for(int i=0;i<tokens.size();i++)
-                // {
-                //     cout<<tokens[i]<<" & ";
-                // }
-                // cout<<endl;
-                //cout<<tokens[0]<<"\t"<<tokens[1]<<"\t"<<tokens[2]<<endl;
                 if(tokens[2] == result[0]){
-                    // cout<<tokens[1]<<endl;
-                    // cout<<"in - Same course name"<<endl;
                     bool exist = false;
                     for(int i=0;i<couid_std.size();i++)
                     {
-                        // cout<<"in - vector"<<endl;
                         if(tokens[1]==couid_std[i][0])
                         {
-                            // cout<<"add in std_id"<<endl;
                             exist = true;
                             couid_std[i].push_back(tokens[0]);
                         }
@@ -82,37 +62,56 @@ void mode3(vector<string> result){
                         tmp.push_back(tokens[2]);
                         tmp.push_back(tokens[0]);
                         couid_std.push_back(tmp);
-                        // cout<<"add in course_id"<<endl;
                     }
-                    // cout<<tokens[0]<<"\t"<<tokens[1]<<"\t"<<"block["<<result[i]<<"]"<<endl;
-                    // if(!isStart){
-                    //     cout<<"course_ID\tcourse_Name\n ["<<tokens[1]<<"] \t"<<tokens[2]<<endl;
-                    //     isStart=true;
-                    //     cout<<"\nstudent_ID\tblock_Num\n"<<endl;
-                    // }
+                }
+            }
+        }
+        int sort_num[couid_std.size()];
+        for(int i=0;i<couid_std.size();i++)
+        {
+            sort_num[i]=stoi(couid_std[i][0]);
+        }
 
-                    // isDataExist = 1;
-                    // cout<<tokens[0]<<"\t[block "+result[i]+"]"<<endl;
-                    // courseId = token[1];
-                    //
+        for(int i=0;i<couid_std.size()-1;i++)//Sort the sequence
+        {
+            for(int j=0;j<couid_std.size()-i-1;j++)
+            {
+                if(sort_num[j]>sort_num[j+1])
+                {
+                    int temp;
+                    temp = sort_num[j];
+                    sort_num[j] = sort_num[j+1];
+                    sort_num[j+1]=temp;
                 }
             }
         }
 
-        for(int i=0;i<couid_std.size();i++)
+        // for(int k=0;k<couid_std.size();k++)//test
+        // {
+        //     cout<<sort_num[k]<<endl;
+        // }
+
+        for(int k=0;k<couid_std.size();k++)//print the srudents page by page
         {
-            cout<<couid_std[i][1]<<" - "<<couid_std[i][0]<<endl;
-            // cout<<endl<<"所有修課學生:"<<endl;
-            cout<<endl;
-            for(int j=2;j<couid_std[i].size();j++)
+            for(int i=0;i<couid_std.size();i++)
             {
-                cout<<couid_std[i][j]<<"\t"<<couid_std[i][0]<<"\t"<<couid_std[i][1]<<endl;
+                if(sort_num[k]==stoi(couid_std[i][0]))
+                {
+                    cout<<couid_std[i][1]<<" - "<<couid_std[i][0]<<endl;
+                    cout<<endl;
+                    cout<<"Student Id"<<"\t"<<"Course Id"<<"\t"<<"Course Name"<<endl;
+                    for(int j=2;j<couid_std[i].size();j++)
+                    {
+                        cout<<couid_std[i][j]<<"\t"<<couid_std[i][0]<<"\t\t"<<couid_std[i][1]<<endl;
+                    }
+                    cout<<"Total number: "<<couid_std[i].size()-2<<endl;
+                    cout<<endl;
+                    cout<<"Page: "<<k+1<<"/"<<couid_std.size()<<endl;
+                    system("pause");
+                    system("cls");
+                    break;
+                }
             }
-            cout<<endl;
-            cout<<"(Page: "<<i+1<<"/"<<couid_std.size()<<")";
-            system("pause");
-            system("cls");
         }
     }
-    
 }

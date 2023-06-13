@@ -7,11 +7,11 @@
 
 using namespace std;
 
-vector<string> sssplit(const string& s, char delimiter) {  
+vector<string> sssplit(const string& s, char delim) {  
     vector<string> tokens;  
     string token;  
     istringstream tokenStream(s);  
-    while (getline(tokenStream, token, delimiter)) {  
+    while (getline(tokenStream, token, delim)) {  
         tokens.push_back(token);  
     }  
     return tokens;  
@@ -34,7 +34,7 @@ void mode1(vector<string> result){
         //Go to these block to find information, and print out the classId
         
         int count=0;
-        bool isStart=false;
+        bool Start=false;
 
         for(int i=1; i<result.size(); i++)
         {
@@ -45,9 +45,9 @@ void mode1(vector<string> result){
             while(getline(file, line)){
                 vector<string> tokens=sssplit(line, ',');
                 if(tokens[0] == result[0]){
-                    if(!isStart){
+                    if(!Start){
                         cout<<"student_ID\n ["<<tokens[0]<<"]"<<endl;
-                        isStart=true;
+                        Start=true;
                         cout<<"\nblock_Num\tcourse_ID\tcourse_Name\n"<<endl;
                     }
                     cout<<"[block "<< result[i]<<"]"<<"\t"<<tokens[1]<<"\t\t"<< tokens[2]<< endl;

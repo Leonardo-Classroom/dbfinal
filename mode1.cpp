@@ -57,7 +57,7 @@ void mode1(vector<string> result){
                 //     // system("pause");
                 // }
 
-                if(tokens[1] == result[0]){
+                if(tokens[0] == result[0]){
 
                     if(!isStart){
                         cout<<"student_ID\tcourse_Name\n ["<<tokens[0]<<"] \t"<<tokens[2]<<endl;

@@ -13,7 +13,7 @@ vector<string> ssplit(const string& s, char delimiter) {
     istringstream tokenStream(s);  
     while (getline(tokenStream, token, delimiter)) {  
         tokens.push_back(token);  
-    }  
+    }
     return tokens;  
 }
 

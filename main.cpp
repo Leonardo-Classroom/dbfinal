@@ -176,6 +176,17 @@ int main(int argc, char const *argv[]){
             string courseName;
             cout<<"courseName> ";
             cin>>courseName;
+            
+
+            vector<string> test;
+            test=indexCourseName->findKeyword(courseName);
+            for(int x=0;x<test.size();x++){
+                cout<<test[x]<<" ";
+            }
+            cout<<endl;
+            system("pause");
+
+
             result=indexCourseName->find(courseName);
 
             mode3(result);

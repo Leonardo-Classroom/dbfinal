@@ -64,6 +64,10 @@ class RedBlackTree {
         void insert(vector<string> x);
         vector<string> find(string x);
 
+        vector<string> keyResult;
+        vector<string> findKeyword(string x);
+        void findKeyword(string x, Node *p);
+
 
     
 };

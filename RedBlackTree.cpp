@@ -1,6 +1,7 @@
 #pragma once
 #include "RedBlackTree.h"
 
+#include <algorithm>
 
 void RedBlackTree::rotateRight(Node *p){
 
@@ -102,6 +103,8 @@ RedBlackTree::Node* RedBlackTree::getSmallestChild(RedBlackTree::Node *p){
 
 void RedBlackTree::insert(Node *p, vector<string> data){
 
+    //p->value[0]==data[0]
+    //p->value[0].find(data[0]) != string::npos
     if(p->value[0]==data[0]){
 
         if(data[1]!=p->value[p->value.size()-1]){
@@ -215,6 +218,8 @@ vector<string> RedBlackTree::find(string x){
 
     Node *p=root;
     while(p!=NIL){
+        //p->value[0]==x
+        //p->value[0].find(x) != string::npos
         if(p->value[0]==x){
             cout<<"Found: "<<p->value[0]<<endl;
             // for(int i=0;i<p->value.size();i++){
@@ -233,3 +238,41 @@ vector<string> RedBlackTree::find(string x){
     return none;
 }
 
+vector<string> RedBlackTree::findKeyword(string x){
+
+    keyResult.clear();
+
+    findKeyword(x, root);
+
+    return keyResult;
+}
+
+void RedBlackTree::findKeyword(string x, Node *p){
+
+    if(p==NIL){
+        return;
+    }
+        
+    //LVR
+    if(p->leftTree){
+        findKeyword(x, p->leftTree);
+    }
+
+    for(int i=0;i<p->value.size();i++){
+        //cout<<p->value[i]<<" ";
+        if(p->value[0].find(x) != string::npos){
+            // keyResult.push_back(p->value[0]);
+            if(keyResult.size()==0){
+                keyResult.push_back(p->value[0]);
+            }else if(p->value[0]!=keyResult[keyResult.size()-1]){
+                keyResult.push_back(p->value[0]);
+            }
+        }
+    }
+    //cout<<endl;
+    
+    if(p->rightTree){
+        findKeyword(x, p->rightTree);
+    }    
+    
+}

@@ -15,5 +15,9 @@ int main(int argc, char const *argv[]){
     cout<<s2<<endl;
 
 
+    if (s2.find(s) != string::npos) {
+        cout<<"Found"<<endl;
+    } 
+
     return 0;
 }

@@ -7,6 +7,16 @@
 
 using namespace std;
 
+vector<string> sssplit(const string& s, char delimiter) {  
+    vector<string> tokens;  
+    string token;  
+    istringstream tokenStream(s);  
+    while (getline(tokenStream, token, delimiter)) {  
+        tokens.push_back(token);  
+    }  
+    return tokens;  
+}
+
 void mode1(vector<string> result){
 
     cout<<"mode 1: "<<endl; 
@@ -19,8 +29,49 @@ void mode1(vector<string> result){
         }
         cout<<endl;
         cout<<"==============="<<endl;
-
+		
         //Result[0] is StudentId, result[1]... are blocks, represent there is data in which block in result[0]
         //Go to these block to find information, and print out the classId
+        
+        int count=0;
+        bool isStart=false;
+
+        for(int i=1; i<result.size(); i++)
+        {
+            // if(courseId==result[0] && !isDataExist)
+                // cout<<
+            // cout<<"block"+result[i]+":-------"<<endl;
+
+            string block_str="block"+result[i]+".csv";
+            ifstream file("blocks/"+block_str);
+            string line;
+            getline(file, line);
+            while(getline(file, line)){
+                vector<string> tokens=sssplit(line, ',');
+                // if don't use sssplit
+                // string token;
+                // istringstream tokenstream(line);
+                // while(getline(tokenstream, token, ',')){
+                //     tokens.push_back(token);
+                //     // cout<<token<<", ";
+                //     // system("pause");
+                // }
+
+                if(tokens[1] == result[0]){
+
+                    if(!isStart){
+                        cout<<"Student_ID\tcourse_Name\n ["<<tokens[1]<<"] \t"<<tokens[2]<<endl;
+                        isStart=true;
+                        cout<<"\nstudent_ID\tblock_Num\n"<<endl;
+                    }
+
+                    // isDataExist = 1;
+                    cout<<tokens[0]<<"\t[block "+result[i]+"]"<<endl;
+                    // courseId = token[1];
+                }
+                // system("pause");
+            }
+            // system("pause");
+        }
     }
 }

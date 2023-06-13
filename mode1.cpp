@@ -60,13 +60,14 @@ void mode1(vector<string> result){
                 if(tokens[0] == result[0]){
 
                     if(!isStart){
-                        cout<<"student_ID\tcourse_Name\n ["<<tokens[0]<<"] \t"<<tokens[2]<<endl;
+                        cout<<"student_ID\n ["<<tokens[0]<<"]"<<endl;
                         isStart=true;
-                        cout<<"\nstudent_ID\tblock_Num\n"<<endl;
+                        cout<<"\ncourse_ID\tcourse_Name\t\tblock_Num\n"<<endl;
                     }
 
                     // isDataExist = 1;
-                    cout<<tokens[0]<<"\t[block "+result[i]+"]"<<endl;
+                    cout<<tokens[1]<<"\t\t"<< tokens[2]<<"\t\t[block "<< result[i]<<"]"<< endl;
+
                     // courseId = token[1];
                 }
                 // system("pause");

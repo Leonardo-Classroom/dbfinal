@@ -109,8 +109,9 @@ void mode3(vector<string> result){
                 cout<<couid_std[i][j]<<"\t"<<couid_std[i][0]<<"\t"<<couid_std[i][1]<<endl;
             }
             cout<<endl;
-            // system("pause");
-            // system("cls");
+            cout<<"(Page: "<<i+1<<"/"<<couid_std.size()<<")";
+            system("pause");
+            system("cls");
         }
     }
     

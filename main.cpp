@@ -174,21 +174,33 @@ int main(int argc, char const *argv[]){
 
         }else if(mode=="3"){
             string courseName;
+            int num=-1;
             cout<<"courseName> ";
             cin>>courseName;
-            
+
+            //No found 的話怎麼辦?
 
             vector<string> test;
             test=indexCourseName->findKeyword(courseName);
+            cout<<endl;
+            cout<<"Please choose a course by entering a number."<<endl;
             for(int x=0;x<test.size();x++){
-                cout<<test[x]<<" ";
+                cout<<x+1<<". "<<test[x]<<endl;
             }
             cout<<endl;
-            system("pause");
+            cin>>num;
+            while(1)
+            {
+                if(num<1||num>test.size())
+                {
+                    cout<<"ERROR: Please re-enter a valid number."<<endl;
+                    cin>>num;
+                }
+                else
+                    break;
+            }
 
-
-            result=indexCourseName->find(courseName);
-
+            result=indexCourseName->find(test[num-1]);
             mode3(result);
 
         }else if(mode=="4"){

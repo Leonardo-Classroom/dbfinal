@@ -48,9 +48,9 @@ void mode1(vector<string> result){
                     if(!isStart){
                         cout<<"student_ID\n ["<<tokens[0]<<"]"<<endl;
                         isStart=true;
-                        cout<<"\ncourse_ID\tcourse_Name\t\tblock_Num\n"<<endl;
+                        cout<<"\nblock_Num\tcourse_ID\tcourse_Name\n"<<endl;
                     }
-                    cout<<tokens[1]<<"\t\t"<< tokens[2]<<"\t\t[block "<< result[i]<<"]"<< endl;
+                    cout<<"[block "<< result[i]<<"]"<<"\t"<<tokens[1]<<"\t\t"<< tokens[2]<< endl;
                 }
             }
         }

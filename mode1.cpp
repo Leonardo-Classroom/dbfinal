@@ -60,7 +60,7 @@ void mode1(vector<string> result){
                 if(tokens[1] == result[0]){
 
                     if(!isStart){
-                        cout<<"Student_ID\tcourse_Name\n ["<<tokens[1]<<"] \t"<<tokens[2]<<endl;
+                        cout<<"student_ID\tcourse_Name\n ["<<tokens[0]<<"] \t"<<tokens[2]<<endl;
                         isStart=true;
                         cout<<"\nstudent_ID\tblock_Num\n"<<endl;
                     }
